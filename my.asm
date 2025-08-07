@@ -1,3 +1,5 @@
+INCLUDE "define.asm"
+
 SECTION "VBINTRUPT", ROM0[$40]
 	call vblank_call
 	reti
@@ -10,7 +12,6 @@ SECTION "Header", ROM0[$100]
 	nop
 	jp main 
 	ds $150 - @, 0
-
 
 SECTION "Main", ROM0[$150]
 main:
@@ -44,7 +45,9 @@ main:
 	ld bc, $100
 	call memset
 
+	call ship_init
 	call init_spaceship
+
 
 	ld bc, 0
 	call update_spaceship_loc
@@ -54,7 +57,7 @@ main:
 
 	;set loc x, y
 	ld a, 0
-	ld hl, $c100
+	ld hl, ship_mem
 	ld [hli], a
 	ld [hl], a
 
@@ -63,6 +66,7 @@ main:
 	ld a, %00010001
 	ld [$ffff], a
 
+
 	ei
 
 
@@ -70,7 +74,7 @@ main_loop:
 	jp main_loop
 
 right_press:
-	ld hl, $c100
+	ld hl, ship_mem + ship_x
 	ld a, [hl]
 	inc a
 	ld [hl], a

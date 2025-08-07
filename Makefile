@@ -3,7 +3,7 @@ LINK	= rgblink
 FIX	= rgbfix
 
 TARGET	= my
-OBJS	= my.o
+OBJS	= ship.o my.o utils.o
 ROM	= $(OBJS)
 ASM_SRC	= $(OBJS:.o=.asm)
 

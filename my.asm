@@ -35,6 +35,11 @@ main:
 	ld bc, update_oam_end - update_oam
 	call load_tiles
 
+	ld de, test_2bpp
+	ld hl, $8000 + spaceship_tiles_end - spaceship_tiles
+	ld bc, test_2bpp_end - test_2bpp
+	call load_tiles
+
 	call load_tile_map
 	;ld a, %00011011
 	;ld [$FF47], a
@@ -331,3 +336,6 @@ spaceship_tiles:
 	db $1f,$1f, $1f,$1f, $07,$07, $07,$07, $00,$00, $05,$05, $01,$01, $00,$00
 spaceship_tiles_end:
 
+test_2bpp:
+INCBIN "test.2bpp"
+test_2bpp_end:

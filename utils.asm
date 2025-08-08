@@ -1,4 +1,4 @@
-SECTION "UTIL", WRAM0
+SECTION "UTIL", ROM0
 gbmemset:
 	ld d, a
 	.memset_loop
